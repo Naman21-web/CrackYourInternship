@@ -1,0 +1,22 @@
+int isNegativeWeightCycle(int n, vector<vector<int>>edges){
+	    // Code here
+	    vector<int> dist(n,1e9);
+	    dist[0]=0;
+	    for(int iter=0;iter<n-1;iter++){
+	        for(auto e:edges){
+	            int u = e[0];
+	            int v = e[1];
+	            int w = e[2];
+	            dist[v] = min(dist[v],w+dist[u]);
+	        }
+	    }
+	   // for(int i=0;i<n;i++) cout<<dist[i]<<" ";
+	    for(auto e:edges){
+	        int u = e[0];
+	        int v = e[1];
+	        int w = e[2];
+	       // cout<<v<<u<<w<<" ";
+	        if(dist[v]>w+dist[u]) return 1;
+	    }
+	    return 0;
+	}
